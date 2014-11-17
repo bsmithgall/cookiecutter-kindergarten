@@ -20,3 +20,12 @@ lib64
 
 # Installer logs
 pip-log.txt
+
+# JS installation
+bower_components
+node_modules
+npm-debug.log
+
+# Gruntfile output
+css
+.tmp

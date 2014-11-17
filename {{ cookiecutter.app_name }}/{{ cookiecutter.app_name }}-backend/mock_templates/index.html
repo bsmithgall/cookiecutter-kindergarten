@@ -17,6 +17,17 @@
 <body>
 
   <h1>Congratulations, it worked!</h1>
+  <p>A script tag on this page has access to angular 1.3, the $http service, and a breakpoint to test sending requests via angular to the backend.</p>
+
+  <script src=""></script>
+  <script>
+  var app = angular.module('test', []);
+
+  app.controller('testCtrl', function($http, $q) {
+    debugger;
+  });
+
+  </script>
 
 </body>
 

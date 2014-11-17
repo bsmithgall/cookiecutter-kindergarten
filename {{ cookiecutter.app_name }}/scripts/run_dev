@@ -1,0 +1,11 @@
+if (( $(PWD | awk -F/ '{print $NF}') == '{{ cookiecutter.app_name }}' )); then
+    export TEMPLATE_DIR=$PWD"/web/app/"
+    export STATIC_DIR=$PWD"/web/app/"
+
+    cd {{ cookiecutter.app-name }}-web && grunt clean:tmp && grunt less:development && cd ../
+
+    PYTHONPATH="./api" python api/byakhee/app.py
+
+else
+    echo "You need to be in the project root to run this!"
+fi
