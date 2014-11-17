@@ -88,6 +88,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // Copy Javascript files to .tmp
     copy: {
       development: {
         files: [{
@@ -99,33 +100,43 @@ module.exports = function(grunt) {
       }
     },
 
-    // Clean out any references to /static/ in our index.html and copied JS
-    // This allows the files to be happily loaded both by the grunt server
-    // and by the Flask app
-    grunt.registerTask('removeStatic', 'removes references to /static/', function() {
-      function removeStatic(abspath, rootdir, subdir, filename) {
-        // open the file in memory
-        var file = grunt.file.read(abspath);
-        // replace /static/ with /
-        var revisedFile = file.replace(/\/static\//g, '/');
-
-        // overwrite the original file with the new one
-        grunt.file.write(abspath, revisedFile);
+    // If there are mocks, use targethtml to clean them out
+    // and move the resulting file to .tmp
+    targethtml: {
+      development: {
+        files: {
+          '.tmp/index.html': '<%= {{ cookiecutter.app_name }}.app %>/index.html',
+        }
       }
+    }
+  });
 
-      grunt.file.recurse('.tmp', removeStatic);
-    });
+  // Clean out any references to /static/ in our index.html and copied JS
+  // This allows the files to be happily loaded both by the grunt server
+  // and by the Flask app
+  grunt.registerTask('removeStatic', 'removes references to /static/', function() {
+    function removeStatic(abspath, rootdir, subdir, filename) {
+      // open the file in memory
+      var file = grunt.file.read(abspath);
+      // replace /static/ with /
+      var revisedFile = file.replace(/\/static\//g, '/');
 
-    grunt.registerTask('serve', [
-      'clean:tmp',
-      'copy:development',
-      'removeStatic',
-      'connect:development',
-      'less:development',
-      'watch'
-    ]);
+      // overwrite the original file with the new one
+      grunt.file.write(abspath, revisedFile);
+    }
 
-    // Add more grunt tasks here
+    grunt.file.recurse('.tmp', removeStatic);
+  });
 
-  })
+  grunt.registerTask('serve', [
+    'clean:tmp',
+    'targethtml:development',
+    'copy:development',
+    'removeStatic',
+    'connect:development',
+    'less:development',
+    'watch'
+  ]);
+
+  // Add more grunt tasks here
 };

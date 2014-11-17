@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 class Config(object):
-    DEBUGGER = True
+    DEBUG = True
     RELOADER = True
     PORT = 9000
 
@@ -10,5 +10,5 @@ class DevelopmentConfig(Config):
     pass
 
 class ProductionConfig(Config):
-    DEBUGGER = False
+    DEBUG = False
     RELOADER = False

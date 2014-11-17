@@ -1,0 +1,21 @@
+{
+  "name": "{{ cookiecutter.app_name }}-web",
+  "version": "0.0.0",
+  "description": "{{ cookiecutter.project_short_description }}",
+  "private": true,
+  "author": "{{ cookiecutter.full_name }}",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.9.0",
+    "grunt-contrib-jshint": "~0.9.2",
+    "grunt-contrib-less": "~0.10.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-targethtml": "~0.2.6",
+    "jshint-stylish": "~0.1.5",
+    "load-grunt-tasks": "~0.4.0"
+  }
+}
