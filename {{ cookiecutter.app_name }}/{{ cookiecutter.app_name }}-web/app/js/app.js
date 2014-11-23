@@ -1,0 +1,1 @@
+var app = angular.module('{{ cookiecutter.app_name }}', ['ngRoute']);

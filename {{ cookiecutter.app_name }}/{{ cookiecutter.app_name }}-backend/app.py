@@ -7,7 +7,8 @@ from werkzeug.serving import run_simple
 from blueprints.web import web_bp
 
 def create_app(config=False):
-    app = Flask(__name__)
+    # send global static files to a junk /nostatic path
+    app = Flask(__name__, static_path='/nostatic')
     # generate configuration from environmental variable
     if not config:
         config = os.environ.get('APP_SETTINGS', 'config.DevelopmentConfig')
@@ -20,4 +21,4 @@ if __name__ == '__main__':
     app = create_app()
     run_simple('0.0.0.0', app.config.get('PORT', 9000), app,
         use_reloader=app.config.get('RELOADER', True), 
-        use_debugger=app.config.get('DEBUGGER', True))
+        use_debugger=app.config.get('DEBUG', True))

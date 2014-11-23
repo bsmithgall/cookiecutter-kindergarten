@@ -1,4 +1,3 @@
-===============================
 {{ cookiecutter.project_name }}
 ===============================
 
@@ -10,32 +9,16 @@ About
 Setup
 ---
 
-Developing {{ cookiecutter.project_name }} is as simple as setting up a few environmental variables. It will use `sqlite` as a default database unless otherwise configured. For detailed explanation of setting up with Postgres (for example), please see below. It is also recommended that you use a `virtualenv` with `virtualenvwrapper` to make development easier. See below for an example for setting this up.
+{{ cookiecutter.project_name }} is split into two subdirectories: `{{ cookiecutter.app_name }}-backend`, and `{{ cookiecutter.app_name }}-web`. You can run these parts independently, or together.
 
-1. Set the app's secret key to an environmental variable. For example, add the following to a `.bashrc` or `.bash_profile`: `export {{ cookiecutter.app_name | upper }}_SECRET = 'a-super-secret-key'`
-2. Run the following commands to set up (preferably from inside a virtualenv):
+### Running the whole stack
 
-```
-git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.app_name }}
-cd {{ cookiecutter.app_name }}
-pip install -r requirements/dev.txt
-PYTHONPATH=. python {{ cookiecutter.app_name }}/app.py
-```
+A helpful script has been included in the `scripts` directory to run both backend and frontend together. Simply type `./scripts/run_dev` to access both.
 
-Navigate to `localhost:9000` in your browser.
+### {{ cookiecutter.app_name }}-backend
 
-Deployment
----
-Make sure that your `APP_SETTINGS` environmental variable is set to `config.ProductionConfig`. This will turn off the reloader and debugger.
+The backend uses the kindergarten stack for the ORM and marshmallow for serialization. These provide a very light-weight stack for pure python deveopment. You can run this project independently only. See the README in the `{{ cookiecutter.app_name }}-backend` directory for more details.
 
-Getting Started with Virtualenv
----
+### {{ cookiecutter.app_name }}-web
 
-The best way to familiarize yourself with virtualenvwrapper is to take a look at the [docs](http://virtualenvwrapper.readthedocs.org/en/latest/). The biggest trick is to make sure that your `WORKON_HOME` environmental variable lives in your `.bashrc` or `bash_profile` to ensure that you have access to the `workon` command.
-
-Other Useful Tools
----
-
-+ [Postgres.app](http://postgresapp.com/) is the easiest way to get started with Postgres on MacOSX.
-+ [Peewee](http://peewee.readthedocs.org) and [Marshmallow](http://marshmallow.readthedocs.org) (hence the "Kindergarten stack" name) docs.
-+ [cookiecutter-flask](https://github.com/sloria/cookiecutter-flask), for getting started with a SqlAlchemy-based stack.
+The frontend uses angular.js as the primary framework and Grunt for serving. The combination of the Gruntfile and the angular mocks give a fully-formed simulation of the backend without needing to run any python. See the README in the `{{ cookiecutter.app_name }}-web` directory for more details.

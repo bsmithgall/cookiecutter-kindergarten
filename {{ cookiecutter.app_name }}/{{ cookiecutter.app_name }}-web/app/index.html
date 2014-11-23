@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <title>
+  </title>
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="/static/css/app.css" media="all">
+
+</head>
+
+<body>
+
+  <h1>Congratulations, it worked!</h1>
+  <p>
+    This is the base index for the {{ cookiecutter.app_name }} project.
+  </p>
+
+  <!-- Vendor javascript -->
+  <!-- build:js /static/scripts/vendor.js -->
+  <script src="/static/bower_components/angular/angular.js"></script>
+  <!-- endbuild -->
+
+  <!-- App-specific javascript -->
+  <!-- build:js /static/scripts/{{ cookiecutter.app_name }}.js -->
+  <script src="/static/js/app.js"></script>
+  <!-- endbuild -->
+
+  <!--(if target !dist)><!-->
+  <!-- Mocks -->
+  <!-- <script src="/static/bower_components/angular-mocks/angular-mocks.js"></script> -->
+  <!-- <script src="/static/js/mocks.js"></script> -->
+  <!--<!(endif)-->
+
+</body>
+</html>

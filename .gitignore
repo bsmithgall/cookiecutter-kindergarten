@@ -24,3 +24,12 @@ pip-log.txt
 # Cookiecutter
 output/
 myflaskapp/
+
+# JS installation
+bower_components
+node_modules
+npm-debug.log
+
+# Gruntfile output
+css
+.tmp
