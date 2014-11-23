@@ -24,11 +24,20 @@
   </p>
 
   <!-- Vendor javascript -->
+  <!-- build:js /static/scripts/vendor.js -->
   <script src="/static/bower_components/angular/angular.js"></script>
+  <!-- endbuild -->
 
   <!-- App-specific javascript -->
+  <!-- build:js /static/scripts/{{ cookiecutter.app_name }}.js -->
   <script src="/static/js/app.js"></script>
+  <!-- endbuild -->
+
+  <!--(if target !dist)><!-->
+  <!-- Mocks -->
+  <!-- <script src="/static/bower_components/angular-mocks/angular-mocks.js"></script> -->
+  <!-- <script src="/static/js/mocks.js"></script> -->
+  <!--<!(endif)-->
 
 </body>
-
 </html>

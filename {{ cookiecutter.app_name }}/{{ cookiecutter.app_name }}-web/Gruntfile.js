@@ -40,6 +40,13 @@ module.exports = function(grunt) {
       },
       gruntfile: {
         files: ['Gruntfile.js']
+      },
+      mocks: {
+        files: ['test/mocks/*.js'],
+        tasks: ['concat:mocks'],
+        options: {
+          spawn: false
+        }
       }
     },
 
@@ -100,6 +107,20 @@ module.exports = function(grunt) {
       }
     },
 
+    // Concat the mocks together under an E2EMocks header
+    concat: {
+      mocks: {
+        options: {
+          banner: 'E2EMocks={};\n\n'
+        },
+        src: [
+          'test/mocks/mocks.js',
+          'test/mocks/*.js'
+        ],
+        dest: '.tmp/js/mocks.js'
+      }
+    },
+
     // If there are mocks, use targethtml to clean them out
     // and move the resulting file to .tmp
     targethtml: {
@@ -121,6 +142,17 @@ module.exports = function(grunt) {
       // replace /static/ with /
       var revisedFile = file.replace(/\/static\//g, '/');
 
+      // uncomment mocks
+      if (filename === 'index.html') {
+        revisedFile = revisedFile.replace(
+            '<!-- <script src="/bower_components/angular-mocks/angular-mocks.js"></script> -->',
+            '<script src="/bower_components/angular-mocks/angular-mocks.js"></script>'
+          ).replace(
+            '<!-- <script src="/js/mocks.js"></script> -->',
+            '<script src="/js/mocks.js"></script>'
+          );
+      }
+
       // overwrite the original file with the new one
       grunt.file.write(abspath, revisedFile);
     }
@@ -131,6 +163,7 @@ module.exports = function(grunt) {
   grunt.registerTask('serve', [
     'clean:tmp',
     'targethtml:development',
+    'concat:mocks',
     'copy:development',
     'removeStatic',
     'connect:development',
@@ -138,5 +171,5 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
-  // Add more grunt tasks here
+  // Add more grunt tasks here for deployment build
 };
