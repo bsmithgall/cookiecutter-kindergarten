@@ -4,7 +4,7 @@ if (( $(PWD | awk -F/ '{print $NF}') == '{{ cookiecutter.app_name }}' )); then
 
     cd {{ cookiecutter.app_name }}-web && grunt clean:tmp && grunt less:development && cd ../
 
-    PYTHONPATH="./{{ cookiecutter.app_name }}-backend" python {{ cookiecutter.app_name}}-backend/app.py
+    PYTHONPATH="./{{ cookiecutter.app_name }}-backend" python {{ cookiecutter.app_name}}-backend/{{ cookiecutter.app_name }}/app.py
 
 else
     echo -e "You need to be in the project root to run this! \e[31mRed"

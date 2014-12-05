@@ -8,8 +8,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Declare path variables to be used through the file
     {{ cookiecutter.app_name }}: {
-      app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      base: '{{ cookiecutter.app_name }}-web/src',
+      app: require('./bower.json').appPath || '{{ cookiecutter.app_name }}-web/src/app',
+      dist: '{{ cookiecutter.app_name }}-web/dist'
     },
 
     // Configure connect, a dev web server
@@ -21,7 +22,7 @@ module.exports = function(grunt) {
       development: {
         options: {
           open: true,
-          base: ['.tmp', '<%= {{ cookiecutter.app_name }}.app %>'],
+          base: ['<%= {{ cookiecutter.app_name }}.dist %>', '<%= {{ cookiecutter.app_name }}.app %>'],
         }
       }
     },
@@ -42,7 +43,7 @@ module.exports = function(grunt) {
         files: ['Gruntfile.js']
       },
       mocks: {
-        files: ['test/mocks/*.js'],
+        files: ['<%= {{ cookiecutter.app_name }}.base %>/test/mocks/*.js'],
         tasks: ['concat:mocks'],
         options: {
           spawn: false
@@ -58,6 +59,14 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= {{ cookiecutter.app_name }}.app %>/css/app.css': '<%= {{ cookiecutter.app_name }}.app %>/less/app.less'
+        }
+      },
+      docker: {
+        options: {
+          paths: ['<%= {{ cookiecutter.app_name }}.app %>/less']
+        },
+        files: {
+          '<%= {{ cookiecutter.app_name }}.dist %>/css/app.css': '<%= {{ cookiecutter.app_name }}.app %>/less/app.less'
         }
       }
     },
@@ -82,27 +91,35 @@ module.exports = function(grunt) {
       }
     },
 
-    // Remove files out of our .tmp directory and css files
+    // Remove files out of our dist directory and css files
     clean: {
       tmp: {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            '<%= {{ cookiecutter.app_name }}.dist %>',
             '<%= {{ cookiecutter.app_name }}.app %>/css/*'
           ]
         }]
       }
     },
 
-    // Copy Javascript files to .tmp
+    // Copy Javascript files to dist
     copy: {
       development: {
         files: [{
           expand: true,
           cwd: '<%= {{ cookiecutter.app_name }}.app %>/js',
           src: ['**'],
-          dest: '.tmp/js'
+          dest: '<%= {{ cookiecutter.app_name }}.dist %>/js'
+        }]
+      },
+      docker: {
+        files: [{
+          expand: true,
+          cwd: '<%= {{ cookiecutter.app_name }}.app %>',
+          src: ['bower_components/**', 'js/**'],
+          dest: '<%= {{ cookiecutter.app_name }}.dist %>'
         }]
       }
     },
@@ -114,19 +131,24 @@ module.exports = function(grunt) {
           banner: 'E2EMocks={};\n\n'
         },
         src: [
-          'test/mocks/mocks.js',
-          'test/mocks/*.js'
+          '<%= {{ cookiecutter.app_name }}.base %>/test/mocks/mocks.js',
+          '<%= {{ cookiecutter.app_name }}.base %>/test/mocks/*.js'
         ],
-        dest: '.tmp/js/mocks.js'
+        dest: '<%= {{ cookiecutter.app_name }}.dist %>/js/mocks.js'
       }
     },
 
     // If there are mocks, use targethtml to clean them out
-    // and move the resulting file to .tmp
+    // and move the resulting file to dist
     targethtml: {
       development: {
         files: {
-          '.tmp/index.html': '<%= {{ cookiecutter.app_name }}.app %>/index.html',
+          '<%= {{ cookiecutter.app_name }}.dist %>/index.html': '<%= {{ cookiecutter.app_name }}.app %>/index.html',
+        }
+      },
+      docker: {
+        files: {
+          '<%= {{ cookiecutter.app_name }}.dist %>/index.html': '<%= {{ cookiecutter.app_name }}.app %>/index.html',
         }
       }
     }
@@ -157,8 +179,21 @@ module.exports = function(grunt) {
       grunt.file.write(abspath, revisedFile);
     }
 
-    grunt.file.recurse('.tmp', removeStatic);
+    grunt.file.recurse('{{ cookiecutter.app_name }}-web/dist', removeStatic);
   });
+
+  grunt.registerTask('default', [
+    'docker'
+  ]);
+
+  grunt.registerTask('docker', [
+    'clean:tmp',
+    'targethtml:docker',
+    'concat:mocks',
+    'copy:docker',
+    'removeStatic',
+    'less:docker',
+  ]);
 
   grunt.registerTask('serve', [
     'clean:tmp',
