@@ -32,21 +32,46 @@ module.exports = function(grunt) {
     // gruntfile - Reload the running gruntfile
 
     watch: {
-      less: {
-        files: ['<%= {{ cookiecutter.app_name }}.app %>/less/**/*.less'],
-        tasks: ['less:development'],
-        options: {
-          spawn: false
+      serve: {
+        less: {
+          files: ['<%= {{ cookiecutter.app_name }}.app %>/less/**/*.less'],
+          tasks: ['less:development'],
+          options: {
+            spawn: false
+          }
+        },
+        gruntfile: {
+          files: ['Gruntfile.js']
+        },
+        mocks: {
+          files: ['<%= {{ cookiecutter.app_name }}.base %>/test/mocks/*.js'],
+          tasks: ['concat:mocks'],
+          options: {
+            spawn: false
+          }
         }
       },
-      gruntfile: {
-        files: ['Gruntfile.js']
-      },
-      mocks: {
-        files: ['<%= {{ cookiecutter.app_name }}.base %>/test/mocks/*.js'],
-        tasks: ['concat:mocks'],
-        options: {
-          spawn: false
+      docker: {
+        less: {
+          files: ['<%= {{ cookiecutter.app_name }}.app %>/less/**/*.less'],
+          tasks: ['less:docker'],
+          options: {
+            spawn: false
+          }
+        },
+        js: {
+          files: ['<%= {{ cookiecutter.app_name }}.app %>/js/**/*.{js,html}'],
+          tasks: ['copy:docker'],
+          options: {
+            spawn: false
+          }
+        },
+        index: {
+          files: ['<%= {{ cookiecutter.app_name }}.dist %>/index.html'],
+          tasks: ['targethtml:docker'],
+          options: {
+            spawn: false
+          }
         }
       }
     },
@@ -182,14 +207,51 @@ module.exports = function(grunt) {
     grunt.file.recurse('{{ cookiecutter.app_name }}_web/dist', removeStatic);
   });
 
+  grunt.registerTask('watch:docker', function() {
+    var config = {
+      options: {
+        interrupt: true
+      },
+      less: {
+        files: ['<%= {{ cookiecutter.app_name }}.app %>/less/**/*.less'],
+        tasks: ['less:docker'],
+        options: {
+          spawn: false
+        }
+      },
+      js: {
+        files: ['<%= {{ cookiecutter.app_name }}.app %>/js/**/*.{js,html}'],
+        tasks: ['copy:docker'],
+        options: {
+          spawn: false
+        }
+      },
+      index: {
+        files: ['<%= {{ cookiecutter.app_name }}.dist %>/index.html'],
+        tasks: ['targethtml:docker'],
+        options: {
+          spawn: false
+        }
+      }
+    };
+
+    grunt.config('watch', config);
+    grunt.task.run('watch');
+
+  })
+
   grunt.registerTask('default', [
     'docker'
+  ]);
+
+  grunt.registerTask('dockerWatch', [
+    'docker',
+    'watch:docker'
   ]);
 
   grunt.registerTask('docker', [
     'clean:tmp',
     'targethtml:docker',
-    'concat:mocks',
     'copy:docker',
     'removeStatic',
     'less:docker',
@@ -203,7 +265,7 @@ module.exports = function(grunt) {
     'removeStatic',
     'connect:development',
     'less:development',
-    'watch'
+    'watch:serve'
   ]);
 
   // Add more grunt tasks here for deployment build

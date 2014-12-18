@@ -20,7 +20,7 @@ Navigate to `localhost:9000` in your browser. You should see the simple template
 Getting Started with Virtualenv and Virtualenvwrapper
 ---
 
-Using a virtual environment is the easiest way to develop with this stack. The best way to familiarize yourself with virtualenv and the set of tools on top of it -- the virtualenvwrapper is to take a look at the [docs](http://virtualenvwrapper.readthedocs.org/en/latest/). The biggest trick is to make sure that your `WORKON_HOME` environmental variable lives in your `.bashrc` or `bash_profile` to ensure that you always have access to the `workon` command.
+If you don't want to use Docker, using a virtual environment is the easiest way to develop with this stack. The best way to familiarize yourself with virtualenv and the set of tools on top of it -- the virtualenvwrapper is to take a look at the [docs](http://virtualenvwrapper.readthedocs.org/en/latest/). The biggest trick is to make sure that your `WORKON_HOME` environmental variable lives in your `.bashrc` or `bash_profile` to ensure that you always have access to the `workon` command.
 
 Other Useful Links and Tools
 ---
