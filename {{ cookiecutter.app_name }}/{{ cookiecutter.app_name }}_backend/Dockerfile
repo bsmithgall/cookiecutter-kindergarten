@@ -13,4 +13,6 @@ RUN pip install -r requirements/dev.txt
 
 EXPOSE 8080
 
+ENV PYTHONPATH /app
+
 CMD python {{ cookiecutter.app_name }}/app.py

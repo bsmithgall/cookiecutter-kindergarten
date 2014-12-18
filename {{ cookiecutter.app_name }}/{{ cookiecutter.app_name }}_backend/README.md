@@ -1,4 +1,4 @@
-{{ cookiecutter.app_name }}-backend
+{{ cookiecutter.app_name }}_backend
 ===============================
 
 About
@@ -9,7 +9,7 @@ About
 Development
 ---
 
-Developing {{ cookiecutter.app_name }}-backend is a simple Flask application. It can be developed similarly to any other Flask app. The stack uses [Peewee](http://peewee.readthedocs.org) as an ORM and [Marshmallow](http://marshmallow.readthedocs.org) for a serializer. Running the backend independently gives you access to a blank template with a basic angular controller for simulating GET and POST requests to your API. To run the backend by itself, simply run the following command from inside the {{ cookiecutter.app_name }}-backend directory:
+Developing {{ cookiecutter.app_name }}_backend is a simple Flask application. It can be developed similarly to any other Flask app. The stack uses [Peewee](http://peewee.readthedocs.org) as an ORM and [Marshmallow](http://marshmallow.readthedocs.org) for a serializer. Running the backend independently gives you access to a blank template with a basic angular controller for simulating GET and POST requests to your API. To run the backend by itself, simply run the following command from inside the {{ cookiecutter.app_name }}_backend directory:
 
 ```
 PYTHONPATH=. python {{ cookiecutter.app_name }}/app.py

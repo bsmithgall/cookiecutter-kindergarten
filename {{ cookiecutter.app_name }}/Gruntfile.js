@@ -8,9 +8,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Declare path variables to be used through the file
     {{ cookiecutter.app_name }}: {
-      base: '{{ cookiecutter.app_name }}-web/src',
-      app: require('./bower.json').appPath || '{{ cookiecutter.app_name }}-web/src/app',
-      dist: '{{ cookiecutter.app_name }}-web/dist'
+      base: '{{ cookiecutter.app_name }}_web/src',
+      app: require('./bower.json').appPath || '{{ cookiecutter.app_name }}_web/src/app',
+      dist: '{{ cookiecutter.app_name }}_web/dist'
     },
 
     // Configure connect, a dev web server
@@ -179,7 +179,7 @@ module.exports = function(grunt) {
       grunt.file.write(abspath, revisedFile);
     }
 
-    grunt.file.recurse('{{ cookiecutter.app_name }}-web/dist', removeStatic);
+    grunt.file.recurse('{{ cookiecutter.app_name }}_web/dist', removeStatic);
   });
 
   grunt.registerTask('default', [

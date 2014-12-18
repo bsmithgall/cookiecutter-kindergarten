@@ -4,23 +4,28 @@ db:
     - "5432:5432"
 
 api:
-  build: {{ cookiecutter.app_name }}-backend
+  build: {{ cookiecutter.app_name }}_backend
   volumes: 
-    - {{ cookiecutter.app_name }}-backend/{{ cookiecutter.app_name }}:app/{{ cookiecutter.app_name }}
+    - {{ cookiecutter.app_name }}_backend/{{ cookiecutter.app_name }}:app/{{ cookiecutter.app_name }}
   ports:
-    - "8000:8000"
+    - "8080:8080"
   links:
     - db:db
+  environment:
+    - DATABASE={{ cookiecutter.app_name }}
+    - USER={{ cookiecutter.github_username }}
+    - DATABASE_DRIVER=PostgresqlDatabase
+    - DATABASE_HOST=db
 
 web:
-  build: {{ cookiecutter.app_name }}-web
+  build: {{ cookiecutter.app_name }}_web
   volumes:
-    - {{ cookiecutter.app_name }}-web/dist:/var/www
+    - {{ cookiecutter.app_name }}_web/dist:/var/www
   ports:
     - "9000:80"
 
 server:
-  build: {{ cookiecutter.app_name }}-server
+  build: {{ cookiecutter.app_name }}_server
   links:
     - api:api
     - web:web

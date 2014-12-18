@@ -17,6 +17,9 @@ $ cookiecutter https://github.com/bsmithgall/cookiecutter-kindergarten.git
 
 You will asked to fill out some basic information about your app, which will then be used by the project.
 
+Running the App
+---
+
 Features
 ---
 + [`Peewee`](http://peewee.readthedocs.org) for simple ORM
@@ -27,6 +30,7 @@ Features
 + Node/npm and bower for javascript dependency management [new, 0.1.1]
 + Separation of `backend` and `web` subdirectories for side-by-side development of the frontend and backend [new, 0.1.1]
 + Automatic inclusion of bare angular mocks to allow total development separation [new, 0.1.1]
++ Separate [Docker](https://www.docker.com/) containers for the python app and a default Postgres database [new, 0.1.2]
 
 Versions
 ---
