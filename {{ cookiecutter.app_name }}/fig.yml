@@ -1,0 +1,33 @@
+db:
+  image: postgres:9.3
+  ports:
+    - "5432:5432"
+
+api:
+  build: {{ cookiecutter.app_name }}_backend
+  volumes: 
+    - {{ cookiecutter.app_name }}_backend/{{ cookiecutter.app_name }}:app/{{ cookiecutter.app_name }}
+  ports:
+    - "8080:8080"
+  links:
+    - db:db
+  environment:
+    - DATABASE={{ cookiecutter.app_name }}
+    - USER={{ cookiecutter.github_username }}
+    - DATABASE_DRIVER=PostgresqlDatabase
+    - DATABASE_HOST=db
+
+web:
+  build: {{ cookiecutter.app_name }}_web
+  volumes:
+    - {{ cookiecutter.app_name }}_web/dist:/var/www
+  ports:
+    - "9000:80"
+
+server:
+  build: {{ cookiecutter.app_name }}_server
+  links:
+    - api:api
+    - web:web
+  ports:
+    - "80:80"

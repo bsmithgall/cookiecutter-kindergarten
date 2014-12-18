@@ -5,7 +5,11 @@ import os
 import peewee as pw
 
 db_driver = getattr(pw, os.environ.get('DATABASE_DRIVER', 'SqliteDatabase'))
-db = db_driver(os.environ.get('DATABASE_NAME', {{ cookiecutter.app_name }}))
+db = db_driver(
+        os.environ.get('DATABASE_NAME', '{{ cookiecutter.app_name }}'),
+        host=os.environ.get('DATABASE_HOST', 'localhost'),
+        user=os.environ.get('DATABASE_URL', '{{ cookiecutter.github_username }}')
+    )
 
 class BaseModel(pw.Model):
     """Base Model -- all inheriting classes share the same database"""

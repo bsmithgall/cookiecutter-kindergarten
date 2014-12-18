@@ -1,10 +1,10 @@
 if (( $(PWD | awk -F/ '{print $NF}') == '{{ cookiecutter.app_name }}' )); then
-    export TEMPLATE_DIR=$PWD"/{{ cookiecutter.app_name }}-web/app/"
-    export STATIC_DIR=$PWD"/{{ cookiecutter.app_name }}-web/app/"
+    export TEMPLATE_DIR=$PWD"/{{ cookiecutter.app_name }}_web/src/app/"
+    export STATIC_DIR=$PWD"/{{ cookiecutter.app_name }}_web/src/app/"
 
-    cd {{ cookiecutter.app_name }}-web && grunt clean:tmp && grunt less:development && cd ../
+    cd {{ cookiecutter.app_name }}_web && grunt clean:tmp && grunt less:development && cd ../
 
-    PYTHONPATH="./{{ cookiecutter.app_name }}-backend" python {{ cookiecutter.app_name}}-backend/app.py
+    PYTHONPATH="./{{ cookiecutter.app_name }}_backend" python {{ cookiecutter.app_name}}_backend/{{ cookiecutter.app_name }}/app.py
 
 else
     echo -e "You need to be in the project root to run this! \e[31mRed"

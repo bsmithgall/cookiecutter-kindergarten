@@ -1320,7 +1320,7 @@ function getNgAttribute(element, ngAttr) {
    <file name="style.css">
    div[ng-controller] {
        margin-bottom: 1em;
-       -webkit-border-radius: 4px;
+       _webkit-border-radius: 4px;
        border-radius: 4px;
        border: 1px solid;
        padding: .5em;
@@ -9880,7 +9880,7 @@ function $InterpolateProvider() {
      * It will be rendered as a regular start/end marker, and will not be interpreted as an expression
      * or binding.
      *
-     * This enables web-servers to prevent script injection attacks and defacing attacks, to some
+     * This enables web_servers to prevent script injection attacks and defacing attacks, to some
      * degree, while also enabling code examples to work without relying on the
      * {@link ng.directive:ngNonBindable ngNonBindable} directive.
      *
@@ -18313,7 +18313,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
        </script>
        <style>
         .my-form {
-          -webkit-transition:all linear 0.5s;
+          _webkit-transition:all linear 0.5s;
           transition:all linear 0.5s;
           background: transparent;
         }
@@ -20779,7 +20779,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
        </script>
        <style>
          .my-input {
-           -webkit-transition:all linear 0.5s;
+           _webkit-transition:all linear 0.5s;
            transition:all linear 0.5s;
            background: transparent;
          }
@@ -21978,7 +21978,7 @@ function classDirective(name, selector) {
      </file>
      <file name="style.css">
        .base-class {
-         -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+         _webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
          transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
        }
 
@@ -22541,7 +22541,7 @@ var ngControllerDirective = [function() {
 
           beforeEach(function() {
             util = require('util');
-            webdriver = require('protractor/node_modules/selenium-webdriver');
+            webdriver = require('protractor/node_modules/selenium_webdriver');
           });
 
           // For now, we only test on Chrome,
@@ -23126,7 +23126,7 @@ forEach(
       }
 
       .animate-if.ng-enter, .animate-if.ng-leave {
-        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        _webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
         transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
       }
 
@@ -23275,7 +23275,7 @@ var ngIfDirective = ['$animate', function($animate) {
       }
 
       .slide-animate.ng-enter, .slide-animate.ng-leave {
-        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        _webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
         transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 
         position:absolute;
@@ -23967,7 +23967,7 @@ var ngPluralizeDirective = ['$locale', '$interpolate', function($locale, $interp
       .animate-repeat.ng-move,
       .animate-repeat.ng-enter,
       .animate-repeat.ng-leave {
-        -webkit-transition:all linear 0.5s;
+        _webkit-transition:all linear 0.5s;
         transition:all linear 0.5s;
       }
 
@@ -24365,7 +24365,7 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
 
       .animate-show.ng-hide-add.ng-hide-add-active,
       .animate-show.ng-hide-remove.ng-hide-remove-active {
-        -webkit-transition:all linear 0.5s;
+        _webkit-transition:all linear 0.5s;
         transition:all linear 0.5s;
       }
 
@@ -24521,7 +24521,7 @@ var ngShowDirective = ['$animate', function($animate) {
     </file>
     <file name="animations.css">
       .animate-hide {
-        -webkit-transition:all linear 0.5s;
+        _webkit-transition:all linear 0.5s;
         transition:all linear 0.5s;
         line-height:20px;
         opacity:1;
@@ -24720,7 +24720,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
       }
 
       .animate-switch.ng-animate {
-        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+        _webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
         transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 
         position:absolute;

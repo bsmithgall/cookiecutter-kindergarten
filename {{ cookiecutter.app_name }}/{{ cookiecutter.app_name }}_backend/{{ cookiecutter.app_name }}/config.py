@@ -4,7 +4,7 @@
 class Config(object):
     DEBUG = True
     RELOADER = True
-    PORT = 9000
+    PORT = 8080
 
 class DevelopmentConfig(Config):
     pass
