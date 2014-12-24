@@ -42,7 +42,8 @@ Features
 
 Versions
 ---
-+ 0.1.1 [this version]: Includes angular
++ 0.1.2 [this version]: Includes complete Docker images for all repos
++ 0.1.1: Includes angular
 + [0.1.0: Python-only](https://github.com/bsmithgall/cookiecutter-kindergarten/tree/basic-python)
 
 License
